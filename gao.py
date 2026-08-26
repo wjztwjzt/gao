@@ -12,7 +12,6 @@ DISK_THRESHOLD = 90.0    # 磁盘使用率超过90%报警
 # ================
 
 def send_bark(title, body):
-#    url = f"https://bark.658877.xyz/HoN9rwTbWCg0qBTif5m14E/{title}/{body}"
     url =os.getenv(f"{url}/{title}/{body}")
     try:
         requests.get(url, timeout=5)
