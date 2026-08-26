@@ -10,7 +10,7 @@ CPU_THRESHOLD = 98.0
 MEM_THRESHOLD = 98.0
 DISK_THRESHOLD = 90.0    # 磁盘使用率超过90%报警
 # ================
-
+vps_name = os.getenv("name")
 def send_bark(title, body):
     url = os.getenv("url")
 
@@ -30,16 +30,16 @@ while True:
     disk = psutil.disk_usage("/").percent
 
     if cpu >= CPU_THRESHOLD:
-        send_bark("4GVPS CPU高占用", f"CPU: {cpu:.1f}%")
+        send_bark(f"{vps_name}VPS CPU高占用", f"CPU: {cpu:.1f}%")
 
     if mem >= MEM_THRESHOLD:
-        send_bark("4GVPS 内存高占用", f"内存: {mem:.1f}%")
+        send_bark(f"{vps_name}VPS 内存高占用", f"内存: {mem:.1f}%")
 
     if disk >= DISK_THRESHOLD:
         usage = psutil.disk_usage("/")
         free_gb = usage.free / 1024**3
         send_bark(
-            "4GVPS 磁盘空间不足",
+            f"{vps_name}VPS 磁盘空间不足",
             f"磁盘: {disk:.1f}% 剩余: {free_gb:.1f}GB"
         )
 
