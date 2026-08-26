@@ -1,0 +1,16 @@
+[Unit]
+Description=barkgao
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/data/gao
+EnvironmentFile=/data/gao/.env
+ExecStart=/data/gao/venv/bin/python /data/gao/gao.py
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
