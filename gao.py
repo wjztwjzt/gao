@@ -13,8 +13,12 @@ DISK_THRESHOLD = 90.0    # 磁盘使用率超过90%报警
 
 def send_bark(title, body):
     url = os.getenv("url")
-    url = f"{url}/{title}/{body}"
-    print(url)
+
+    if not url:
+        print("错误：环境变量 url 未设置")
+        return
+
+    url = f"{url.rstrip('/')}/{title}/{body}"
     try:
         requests.get(url, timeout=5)
     except Exception:
